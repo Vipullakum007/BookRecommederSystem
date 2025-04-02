@@ -1,0 +1,134 @@
+/* Main styles for Book Recommender System */
+
+/* General styles */
+body {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar styles */
+.navbar {
+    background: #6a11cb !important;
+}
+
+.navbar-brand, .nav-link {
+    color: white !important;
+}
+
+/* Book card styles */
+.book-card {
+    transition: transform 0.3s;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: contain;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.rating-stars {
+    color: #ffc107;
+}
+
+/* Hero section styles */
+.hero-section {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 30px;
+}
+
+/* Recommend section styles */
+.recommend-section {
+    background: linear-gradient(to right, #2575fc, #6a11cb);
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 30px;
+    border-radius: 15px;
+}
+
+.input-group {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Results section styles */
+.results-section {
+    margin-top: 40px;
+}
+
+.no-results {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Autocomplete styles */
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+    background-color: #e9ecef !important;
+}
+
+/* Footer styles */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section, .recommend-section {
+        padding: 30px 15px;
+    }
+    
+    .card-img-top {
+        height: 200px;
+    }
+}
+
+/* Animation for card loading */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.book-card {
+    animation: fadeIn 0.6s ease-out;
+}
