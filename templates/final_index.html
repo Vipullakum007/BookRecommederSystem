@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Book Recommender</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recommend">Recommend</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1>Discover Your Next Favorite Book</h1>
+            <p class="lead">Browse popular books or get personalized recommendations based on your preferences</p>
+            <a href="/recommend" class="btn btn-light btn-lg mt-3">Get Recommendations</a>
+        </div>
+    </div>
+
+    <!-- Popular Books Section -->
+    <div class="container">
+        <h2 class="text-center mb-4">Popular Books</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+            {% for i in range(book_name|length) %}
+            <div class="col">
+                <div class="card book-card">
+                    <img src="{{ image[i] }}" class="card-img-top" alt="{{ book_name[i] }}">
+                    <div class="card-body">
+                        <h5 class="card-title text-truncate" title="{{ book_name[i] }}">{{ book_name[i] }}</h5>
+                        <p class="card-text text-truncate" title="{{ author[i] }}">By {{ author[i] }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="rating-stars">
+                                {% set rating_int = (rating[i]|float)|int %}
+                                {% set has_half = (rating[i]|float - rating_int)|round(1) >= 0.5 %}
+                                
+                                {% for _ in range(rating_int) %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                                
+                                {% if has_half %}
+                                    <i class="fas fa-star-half-alt"></i>
+                                {% endif %}
+                                
+                                <span class="ms-1">{{ rating[i]|float|round(1) }}</span>
+                            </div>
+                            <small class="text-muted">{{ votes[i] }} votes</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2025 Book Recommender System</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     # print(popular_df.columns)
-    return render_template('index.html' ,
+    return render_template('final_index.html' ,
                            book_name = list(popular_df['Book-Title'].values),
                             author = list(popular_df['Book-Author'].values),
                             image = list(popular_df['Image-URL-M'].values),
@@ -22,7 +22,7 @@ def hello():
 
 @app.route('/recommend')
 def recommend_ui():
-    return render_template('recommend.html')
+    return render_template('final_recommend.html')
 
 @app.route('/recommend_books' , methods=['POST'])
 def recommend():
@@ -30,7 +30,7 @@ def recommend():
     try:
         # Check if book exists in our dataset
         if book_name not in pt.index:
-            return render_template('recommend.html', data=None)
+            return render_template('final_recommend.html', data=None)
             
         index = np.where(pt.index == book_name)[0][0]
         distances = similarity_score[index]
@@ -45,11 +45,11 @@ def recommend():
             item.extend(list(temp_df.drop_duplicates('Book-Title')['Image-URL-M'].values))
             data.append(item)
             
-        return render_template('recommend.html', data=data)
+        return render_template('final_recommend.html', data=data)
         
     except Exception as e:
         print(f"Error: {e}")
-        return render_template('recommend.html', data=None)
+        return render_template('final_recommend.html', data=None)
 
 if __name__ == '__main__':
     app.run()
